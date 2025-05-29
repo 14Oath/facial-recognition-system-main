@@ -13,7 +13,7 @@ const Header = () => {
         <nav className="flex justify-between items-center">
           <a href="#" className="flex items-center text-xl font-bold">
             <img
-              src="/api/placeholder/40/40"
+              src="https://internetlogin.cu.edu.ng/XX/YY/ZZ/CI/DEPGGHFGOGBGOGEHPFMEPGHGPG"
               alt="Covenant University Logo"
               className="h-10 mr-2"
             />

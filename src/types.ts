@@ -4,7 +4,7 @@ export interface StudentFormData {
   program: string;
   matricNumber: string;
   regNumber: string;
-  roomNumber: string;
+  roomDetails: string;
   gender: string;
   hallOfResidence: string;
   level: string;

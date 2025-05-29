@@ -3,7 +3,7 @@ const FeaturesSection = () => {
     <section id="features" className="py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-center mb-12 text-3xl font-bold text-[#351c56] relative after:content-[''] after:block after:w-20 after:h-1 after:bg-[#f3cf00] after:mx-auto after:mt-4">
-          Project Features
+          Features
         </h2>
 
         <div className="flex flex-wrap justify-center gap-8 mb-16">

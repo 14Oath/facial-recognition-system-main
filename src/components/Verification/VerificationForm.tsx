@@ -113,16 +113,16 @@ export default function ExeatSignOut() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-p-700 to-gray-800 p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">🎓 Covenant University</h1>
-          <p className="text-purple-200 text-lg">Exeat Sign Out System</p>
+          <h1 className="text-4xl font-bold text-white mb-6">🎓 Covenant University Exeat Sign In/Out</h1>
+          <p className="text-purple-200 text-lg">Exeat Sign In/Out System</p>
         </div>
 
         {/* Main Content Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="https://cuportal.covenantuniversity.edu.ng/assets/img/CU4.jpg)">
           {/* Camera Section */}
           <div className="bg-gray-50 rounded-xl p-6 mb-6 text-center">
             <div className="w-80 h-48 mx-auto rounded-lg overflow-hidden bg-gray-200 mb-4 relative border-4 border-purple-200">
@@ -132,6 +132,7 @@ export default function ExeatSignOut() {
                   autoPlay
                   muted
                   playsInline
+                  style={{transform: 'scaleX(-1)'}}
                 />
             </div>
             
@@ -140,7 +141,7 @@ export default function ExeatSignOut() {
                 onClick={startCamera}
                 disabled={cameraActive}
                 className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 ${
-                  cameraActive ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700 text-white'
+                  cameraActive ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-gray-600 hover:bg-purple-700 text-white'
                 }`}
               >
                 Start Camera
@@ -198,10 +199,11 @@ export default function ExeatSignOut() {
           <div className="bg-purple-50 rounded-xl p-6 mb-6">
             <h3 className="text-2xl font-bold text-purple-800 mb-4">Student Details</h3>
             <div className="grid grid-cols-2 gap-4 text-lg">
-              <div><span className="font-semibold text-purple-700">Name:</span> <span className="text-gray-700">John Doe</span></div>
-              <div><span className="font-semibold text-purple-700">Matric:</span> <span className="text-gray-700">17CU123456</span></div>
-              <div><span className="font-semibold text-purple-700">Department:</span> <span className="text-gray-700">Computer Science</span></div>
-              <div><span className="font-semibold text-purple-700">Level:</span> <span className="text-gray-700">400 Level</span></div>
+              <div><span className="font-semibold text-black-700">Name:</span> <span className="text-gray-700">John Doe</span></div>
+              <div><span className="font-semibold text-black-700">Matric:</span> <span className="text-gray-700">17CU123456</span></div>
+              <div><span className="font-semibold text-black-700">Department:</span> <span className="text-gray-700">Computer Science</span></div>
+              <div><span className="font-semibold text-black-700">Level:</span> <span className="text-gray-700">400 Level</span></div>
+              <div><span className="font-semibold text-black-700">Hall of Residence:</span><span className="text-gray-700">Dorcas Hall</span></div>
             </div>
           </div>
 

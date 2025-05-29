@@ -54,7 +54,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-700 pt-6 text-center">
-          <p>&copy; 2025 Covenant University. All rights reserved.</p>
+          <p>&copy; 2025 Eshiett-Ambunga Faith. All rights reserved.</p>
         </div>
       </div>
     </footer>

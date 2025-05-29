@@ -48,7 +48,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
     type: "",
   });
 
-  const REQUIRED_CAPTURES = 3; // Number of captures required for registration
+  const REQUIRED_CAPTURES = 1; // Number of captures required for registration
 
   // Handle form input changes
   const handleInputChange = (
@@ -91,7 +91,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
     setCapturedImages([]);
   };
 
-  // Validate email format (must end with @stu.covenantuniversity.edu.ng)
+  // Validate email format (must end with @stu.cu.edu.ng)
   const validateEmail = (email: string): boolean => {
     return email.endsWith("@stu.cu.edu.ng");
   };
@@ -277,7 +277,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
               <div className="mb-6">
                 <label
-                  htmlFor="roomNumber"
+                  htmlFor="roomDetails"
                   className="block mb-2 font-medium text-primary-dark"
                 >
                   Room Number
@@ -285,8 +285,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
                 <input
                   type="text"
                   className="w-full p-3 border border-gray-300 rounded-md focus:border-primary-light focus:outline-none focus:ring-2 focus:ring-primary-light/20"
-                  id="roomNumber"
-                  placeholder="Enter your Room Number"
+                  id="roomDetails"
+                  placeholder="Enter your Room Details (e.g., A101)" 
                   value={formData.roomDetails}
                   onChange={handleInputChange}
                   required

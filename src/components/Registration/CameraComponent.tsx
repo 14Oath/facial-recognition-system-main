@@ -79,6 +79,10 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
   };
 
   const capturePhoto = () => {
+     if (capturedImages.length >= requiredCaptures) {
+    showStatusMessage(`Required number of photos already captured (${requiredCaptures}/${requiredCaptures})`, "info");
+    return;
+  }
     if (!stream || !canvasRef.current || !videoRef.current) {
       showStatusMessage("Camera is not started", "error");
       return;
@@ -95,6 +99,10 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
     canvasRef.current.width = videoRef.current.videoWidth;
     canvasRef.current.height = videoRef.current.videoHeight;
 
+    // Flip the canvas horizontally to match video mirroring
+    context.translate(canvasRef.current.width, 0);
+    context.scale(-1, 1);
+    
     // Draw the current video frame onto the canvas
     context.drawImage(
       videoRef.current,
@@ -147,7 +155,7 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
           ref={videoRef}
           autoPlay
           playsInline
-          className="w-full h-auto block bg-gray-800 border-4 border-[#351c56] shadow-lg rounded-lg"
+          className="w-full h-auto block bg-gray-800 border-4 border-[#351c56] shadow-lg rounded-lg rounded-lg scale-x-[-1]"
         />
         <canvas ref={canvasRef} className="hidden" />
       </div>
