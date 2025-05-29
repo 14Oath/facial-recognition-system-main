@@ -155,7 +155,7 @@ const CameraComponent: React.FC<CameraComponentProps> = ({
           ref={videoRef}
           autoPlay
           playsInline
-          className="w-full h-auto block bg-gray-800 border-4 border-[#351c56] shadow-lg rounded-lg rounded-lg scale-x-[-1]"
+          className="w-full h-auto block bg-gray-800 border-4 border-[#351c56] shadow-lg rounded-lg scale-x-[-1]"
         />
         <canvas ref={canvasRef} className="hidden" />
       </div>

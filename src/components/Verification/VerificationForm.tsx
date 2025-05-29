@@ -1,13 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 export default function ExeatSignOut() {
-  const [currentTime, setCurrentTime] = useState<string>(new Date().toLocaleString());
-  const [message, setMessage] = useState<string>('Student Verified Successfully!');
+  const [currentTime, setCurrentTime] = useState<string>(
+    new Date().toLocaleString()
+  );
+  const [message, setMessage] = useState<string>(
+    "Student Verified Successfully!"
+  );
   const [cameraActive, setCameraActive] = useState<boolean>(false);
   const [photoCaptured, setPhotoCaptured] = useState<boolean>(false);
-  const [capturedImageUrl, setCapturedImageUrl] = useState<string>('');
+  const [capturedImageUrl, setCapturedImageUrl] = useState<string>("");
   const [stream, setStream] = useState<MediaStream | null>(null);
-  
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -34,8 +38,10 @@ export default function ExeatSignOut() {
         },
       };
 
-      const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
-      
+      const mediaStream = await navigator.mediaDevices.getUserMedia(
+        constraints
+      );
+
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
         // Wait for video to be ready before playing
@@ -45,71 +51,71 @@ export default function ExeatSignOut() {
           }
         };
       }
-      
+
       setStream(mediaStream);
       setCameraActive(true);
       setPhotoCaptured(false);
-      setCapturedImageUrl('');
-      setMessage('📹 Camera Active - Ready for Recognition');
+      setCapturedImageUrl("");
+      setMessage("📹 Camera Active - Ready for Recognition");
     } catch (error) {
       console.error("Camera access denied:", error);
-      setMessage('❌ Could not access camera.');
+      setMessage("❌ Could not access camera.");
     }
   };
 
   const capturePhoto = (): void => {
     if (!stream || !videoRef.current || !canvasRef.current) {
-      setMessage('❌ Camera is not started');
+      setMessage("❌ Camera is not started");
       return;
     }
 
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    
+    const context = canvas.getContext("2d");
+
     if (!context) {
-      setMessage('❌ Could not get canvas context');
+      setMessage("❌ Could not get canvas context");
       return;
     }
 
     // Set canvas dimensions to match video
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    
+
     // Draw the current video frame onto the canvas
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    
+
     // Convert canvas to data URL for display
-    const imageDataUrl = canvas.toDataURL('image/jpeg');
+    const imageDataUrl = canvas.toDataURL("image/jpeg");
     setCapturedImageUrl(imageDataUrl);
     setPhotoCaptured(true);
-    setMessage('📸 Photo Captured - Processing Recognition...');
+    setMessage("📸 Photo Captured - Processing Recognition...");
   };
 
   const stopCamera = (): void => {
     if (stream) {
       // Stop all tracks in the stream
       stream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
-      
+
       // Clear video source
       if (videoRef.current) {
         videoRef.current.srcObject = null;
       }
-      
+
       setStream(null);
     }
     setCameraActive(false);
     setPhotoCaptured(false);
-    setCapturedImageUrl('');
-    setMessage('📷 Camera Stopped');
+    setCapturedImageUrl("");
+    setMessage("📷 Camera Stopped");
   };
 
   const handleSignIn = (): void => {
-    setMessage('✅ Sign In Successful - Welcome Back!');
+    setMessage("✅ Sign In Successful - Welcome Back!");
   };
 
   const handleSignOut = (): void => {
-    setMessage('👋 Sign Out Successful - Safe Journey!');
+    setMessage("👋 Sign Out Successful - Safe Journey!");
   };
 
   return (
@@ -117,7 +123,9 @@ export default function ExeatSignOut() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-6">🎓 Covenant University Exeat Sign In/Out</h1>
+          <h1 className="text-4xl font-bold text-white mb-6">
+            🎓 Covenant University Exeat Sign In/Out
+          </h1>
           <p className="text-purple-200 text-lg">Exeat Sign In/Out System</p>
         </div>
 
@@ -126,40 +134,46 @@ export default function ExeatSignOut() {
           {/* Camera Section */}
           <div className="bg-gray-50 rounded-xl p-6 mb-6 text-center">
             <div className="w-80 h-48 mx-auto rounded-lg overflow-hidden bg-gray-200 mb-4 relative border-4 border-purple-200">
-             <video
-                  ref={videoRef}
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  playsInline
-                  style={{transform: 'scaleX(-1)'}}
-                />
+              <video
+                ref={videoRef}
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                playsInline
+                style={{ transform: "scaleX(-1)" }}
+              />
             </div>
-            
+
             <div className="flex gap-3 justify-center">
-              <button 
+              <button
                 onClick={startCamera}
                 disabled={cameraActive}
                 className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 ${
-                  cameraActive ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-gray-600 hover:bg-purple-700 text-white'
+                  cameraActive
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-gray-600 hover:bg-purple-700 text-white"
                 }`}
               >
                 Start Camera
               </button>
-              <button 
+              <button
                 onClick={capturePhoto}
                 disabled={!cameraActive}
                 className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 ${
-                  !cameraActive ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'
+                  !cameraActive
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
                 }`}
               >
                 Capture Photo
               </button>
-              <button 
+              <button
                 onClick={stopCamera}
                 disabled={!cameraActive}
                 className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 ${
-                  !cameraActive ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700 text-white'
+                  !cameraActive
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-red-600 hover:bg-red-700 text-white"
                 }`}
               >
                 Stop Camera
@@ -170,10 +184,12 @@ export default function ExeatSignOut() {
           {/* Captured Image Display */}
           {photoCaptured && capturedImageUrl && (
             <div className="bg-blue-50 rounded-xl p-6 mb-6 text-center">
-              <h3 className="text-xl font-bold text-blue-800 mb-4">📸 Captured Image</h3>
-              <img 
-                src={capturedImageUrl} 
-                alt="Captured" 
+              <h3 className="text-xl font-bold text-blue-800 mb-4">
+                📸 Captured Image
+              </h3>
+              <img
+                src={capturedImageUrl}
+                alt="Captured"
                 className="max-w-md mx-auto rounded-lg shadow-lg border-2 border-blue-200"
               />
             </div>
@@ -181,13 +197,13 @@ export default function ExeatSignOut() {
 
           {/* Action Buttons */}
           <div className="flex gap-4 justify-center mb-8">
-            <button 
+            <button
               onClick={handleSignIn}
               className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-bold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
             >
               Sign In
             </button>
-            <button 
+            <button
               onClick={handleSignOut}
               className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg font-bold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
             >
@@ -197,13 +213,34 @@ export default function ExeatSignOut() {
 
           {/* Student Details */}
           <div className="bg-purple-50 rounded-xl p-6 mb-6">
-            <h3 className="text-2xl font-bold text-purple-800 mb-4">Student Details</h3>
+            <h3 className="text-2xl font-bold text-purple-800 mb-4">
+              Student Details
+            </h3>
             <div className="grid grid-cols-2 gap-4 text-lg">
-              <div><span className="font-semibold text-black-700">Name:</span> <span className="text-gray-700">John Doe</span></div>
-              <div><span className="font-semibold text-black-700">Matric:</span> <span className="text-gray-700">17CU123456</span></div>
-              <div><span className="font-semibold text-black-700">Department:</span> <span className="text-gray-700">Computer Science</span></div>
-              <div><span className="font-semibold text-black-700">Level:</span> <span className="text-gray-700">400 Level</span></div>
-              <div><span className="font-semibold text-black-700">Hall of Residence:</span><span className="text-gray-700">Dorcas Hall</span></div>
+              <div>
+                <span className="font-semibold text-black-700">Name:</span>{" "}
+                <span className="text-gray-700">John Doe</span>
+              </div>
+              <div>
+                <span className="font-semibold text-black-700">Matric:</span>{" "}
+                <span className="text-gray-700">17CU123456</span>
+              </div>
+              <div>
+                <span className="font-semibold text-black-700">
+                  Department:
+                </span>{" "}
+                <span className="text-gray-700">Computer Science</span>
+              </div>
+              <div>
+                <span className="font-semibold text-black-700">Level:</span>{" "}
+                <span className="text-gray-700">400 Level</span>
+              </div>
+              <div>
+                <span className="font-semibold text-black-700">
+                  Hall of Residence:
+                </span>
+                <span className="text-gray-700">Dorcas Hall</span>
+              </div>
             </div>
           </div>
 
@@ -218,9 +255,9 @@ export default function ExeatSignOut() {
           </div>
         </div>
       </div>
-      
+
       {/* Hidden canvas for photo capture */}
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
+      <canvas ref={canvasRef} style={{ display: "none" }} />
     </div>
   );
 }
