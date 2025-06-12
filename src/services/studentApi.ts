@@ -73,15 +73,32 @@ export const submitStudentRegistration = async (
     // Append the image file
     formDataToSend.append("profile_image", imageFile);
 
+    // ✅ Log FormData contents
+    for (let [key, value] of formDataToSend.entries()) {
+      console.log("🧾 Form field:", key, value);
+    }
+
     // Send POST request to the backend
     const response = await fetch(`${API_BASE_URL}/students/create`, {
       method: "POST",
       body: formDataToSend,
-      // Don't set Content-Type header - let the browser set it with boundary for multipart/form-data
     });
 
     // Parse response
     const responseData = await response.json();
+
+    if (responseData.detail?.includes("No face detected")) {
+      throw new Error(
+        "No face was detected in the image. Please retake and try again."
+      );
+    }
+
+    // ❌ Generic error handler
+    if (!response.ok) {
+      throw new Error(
+        responseData.detail || `HTTP error! status: ${response.status}`
+      );
+    }
 
     if (!response.ok) {
       // Handle HTTP errors
